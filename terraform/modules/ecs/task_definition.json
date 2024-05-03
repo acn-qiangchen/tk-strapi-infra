@@ -9,6 +9,12 @@
           "hostPort": 8080
         }
       ],
+      "environmentFiles": [
+        {
+            "value": "arn:aws:s3:::${ENVFILE_BUCKET}/${ENV_FILE_NAME}",
+            "type": "s3"
+        }
+      ],
       "logConfiguration": {
         "logDriver": "${LOG_DRIVER}",
         "options": {

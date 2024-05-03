@@ -23,3 +23,8 @@ resource "aws_iam_role_policy_attachment" "default" {
   role       = aws_iam_role.default.name
   policy_arn = local.ecs_task_execution_role_policy_arn
 }
+
+resource "aws_iam_role_policy_attachment" "s3_full_access" {
+  role       = aws_iam_role.default.name
+  policy_arn = local.s3_full_access
+}

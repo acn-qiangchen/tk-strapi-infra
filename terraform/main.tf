@@ -106,4 +106,8 @@ module "ecs" {
   #ecr_repository_uri = "${module.ecr.repository_uri}"
   ecr_repository_uri = var.app_img_uri
   execution_role_arn = module.iam.execution_role_arn
+
+  #S3
+  env_file_bucket = local.envfile_bucket_name
+  env_file_name   = var.env_file_name
 }

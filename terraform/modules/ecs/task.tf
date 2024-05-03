@@ -16,7 +16,9 @@ resource "aws_ecs_task_definition" "default" {
     ECR_ARN         = "${var.ecr_repository_uri}",
     LOGS_GROUP_NAME = "${var.logs_group_name}",
     LOG_DRIVER      = "${local.task_log_driver}",
-    REGION          = "${var.region}"
+    REGION          = "${var.region}",
+    ENVFILE_BUCKET  = "${var.env_file_bucket}"
+    ENV_FILE_NAME   = "${var.env_file_name}"
   })
 
   family                   = local.task_definitions_name

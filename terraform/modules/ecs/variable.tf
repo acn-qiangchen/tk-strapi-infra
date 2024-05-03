@@ -11,6 +11,10 @@ variable "tag_group" {}
 variable "ecr_repository_uri" {}
 variable "execution_role_arn" {}
 
+# S3
+variable "env_file_bucket" {}
+variable "env_file_name" {}
+
 # Service
 variable "logs_group_name" {}
 variable "tg_arn" {}

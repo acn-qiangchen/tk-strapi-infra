@@ -34,3 +34,26 @@ resource "aws_security_group_rule" "egress_all_all" {
   type              = "egress"
   cidr_blocks       = ["0.0.0.0/0"]
 }
+
+# RDS security group 
+resource "aws_security_group" "rds-sg" {
+  name   = "rds-sg"
+  vpc_id = var.vpc_id
+
+  # Postgres
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # outbound internet access
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+}

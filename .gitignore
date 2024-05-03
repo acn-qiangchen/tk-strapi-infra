@@ -18,5 +18,6 @@
 *.hcl
 
 # working directory for web app
-/globo_web_app/*
 
+# generated file
+*.generated
