@@ -16,3 +16,6 @@ variable "sg_ingress_ip_cidr" {}
 # Network
 variable "az1" {}
 variable "az2" {}
+
+# Application Docker Image
+variable app_img_uri {}
