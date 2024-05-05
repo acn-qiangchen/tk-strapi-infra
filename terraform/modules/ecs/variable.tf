@@ -33,5 +33,5 @@ locals {
   task_requires_compatibilities = "FARGATE"
 
   service_name  = "${var.name_prefix}-service"
-  service_count = 1
+  service_count = 2
 }
