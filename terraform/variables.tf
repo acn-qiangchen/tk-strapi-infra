@@ -40,6 +40,11 @@ variable "database_engine" {}
 locals {
   # Bucket name of env file
   envfile_bucket_name = "${lower(var.name_prefix)}-envfile-${random_integer.s3.result}"
+
+  mediafile_bucket_name = "${lower(var.name_prefix)}-mediafile-${random_integer.s3.result}"
+
+  # env file local name (in order to trigger upload when file contents change)
+  envfile_local_name = "${lower(var.name_prefix)}.${random_integer.s3.result}.env.generated"
 }
 
 resource "random_integer" "s3" {

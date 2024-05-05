@@ -8,6 +8,7 @@ resource "aws_db_instance" "db" {
   engine_version         = var.database_engine_version
   instance_class         = var.database_instance_class
   identifier             = var.database_name
+  db_name                = var.database_name
   username               = var.database_username
   password               = var.database_password
   publicly_accessible    = true

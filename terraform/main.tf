@@ -110,4 +110,7 @@ module "ecs" {
   #S3
   env_file_bucket = local.envfile_bucket_name
   env_file_name   = var.env_file_name
+
+  # application startup fails if envfile or db is not ready
+  depends_on = [aws_s3_object.env_file, aws_db_instance.db]
 }

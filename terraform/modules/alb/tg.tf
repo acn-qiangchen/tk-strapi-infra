@@ -2,7 +2,7 @@ resource "aws_lb_target_group" "default" {
   name                 = local.tg_name
   vpc_id               = var.vpc_id
   target_type          = "ip"
-  port                 = 80
+  port                 = 1337
   protocol             = "HTTP"
   deregistration_delay = 300
 
