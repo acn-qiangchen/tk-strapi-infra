@@ -19,8 +19,19 @@ resource "aws_s3_object" "env_file" {
     Name  = "${var.tag_name}-envfile"
     group = "${var.tag_group}"
   }
-
 }
+
+# # Upload the configuration file to the S3 bucket
+# resource "aws_s3_object" "startup_script" {
+#   bucket = aws_s3_bucket.envfile_bucket.id
+#   key    = var.db_startup_script_name
+#   source = "${path.root}/init-db.sql"
+
+#   tags = {
+#     Name  = "${var.tag_name}-init-db"
+#     group = "${var.tag_group}"
+#   }
+# }
 
 # Create a local file using the generated content
 resource "local_file" "generated_file" {
@@ -67,6 +78,7 @@ resource "aws_iam_access_key" "strapi_s3_user_access_key" {
 # }
 
 # Create an S3 bucket for strapi s3 provider
+# ref : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
 resource "aws_s3_bucket" "strapi_media_bucket" {
   bucket        = local.mediafile_bucket_name
   force_destroy = true
@@ -75,4 +87,30 @@ resource "aws_s3_bucket" "strapi_media_bucket" {
     Name  = "${var.tag_name}-mediafile-bucket"
     group = "${var.tag_group}"
   }
+}
+
+resource "aws_s3_bucket_ownership_controls" "strapi_media_bucket" {
+  bucket = aws_s3_bucket.strapi_media_bucket.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "strapi_media_bucket" {
+  bucket = aws_s3_bucket.strapi_media_bucket.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+resource "aws_s3_bucket_acl" "strapi_media_bucket" {
+  depends_on = [
+    aws_s3_bucket_ownership_controls.strapi_media_bucket,
+    aws_s3_bucket_public_access_block.strapi_media_bucket,
+  ]
+
+  bucket = aws_s3_bucket.strapi_media_bucket.id
+  acl    = "public-read"
 }

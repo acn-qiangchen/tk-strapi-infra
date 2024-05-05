@@ -5,8 +5,8 @@
       "essential": true,
       "portMappings": [
         {
-          "containerPort": 8080,
-          "hostPort": 8080
+          "containerPort": 1337,
+          "hostPort": 1337
         }
       ],
       "environmentFiles": [

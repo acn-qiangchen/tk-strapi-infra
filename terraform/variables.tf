@@ -23,6 +23,7 @@ variable "app_img_uri" {}
 # S3
 # variable "envfile_bucket_name" {}
 variable "env_file_name" {}
+variable "db_startup_script_name" {}
 
 
 # Database

@@ -25,5 +25,5 @@ resource "aws_route_table_association" "public_c" {
 
 resource "aws_main_route_table_association" "public_c" {
   route_table_id = aws_route_table.public.id
-  vpc_id      = aws_vpc.default.id
+  vpc_id         = aws_vpc.default.id
 }
